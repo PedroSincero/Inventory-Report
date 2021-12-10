@@ -11,27 +11,27 @@ class SimpleReport:
         return f"{old}\n{validation}\n{company}\n"
 
 
-def old_date(date):
-    menor_data = date[0]["data_de_fabricacao"]
-    for data in date:
-        if menor_data > data["data_de_fabricacao"]:
-            menor_data = data["data_de_fabricacao"]
-    return f"Data de fabricação mais antiga: {menor_data}"
+def old_date(stock):
+    lowest_date = stock[0]["data_de_fabricacao"]
+    for date in stock:
+        if lowest_date > date["data_de_fabricacao"]:
+            lowest_date = date["data_de_fabricacao"]
+    return f"Data de fabricação mais antiga: {lowest_date}"
 
 
-def validation_date(date):
-    data_val = date[0]["data_de_validade"]
-    data_atual = str(datetime.now().date())
-    for data in date:
-        if data["data_de_validade"] > data_atual:
-            if data_val > data["data_de_validade"]:
-                data_val = data["data_de_validade"]
+def validation_date(stock):
+    data_val = stock[0]["data_de_validade"]
+    date_now = str(datetime.now().date())
+    for date in stock:
+        if date["data_de_validade"] > date_now:
+            if data_val > date["data_de_validade"]:
+                data_val = date["data_de_validade"]
     return f"Data de validade mais próxima: {data_val}"
 
 
 def stock_company(stock):
     result = []
-    palavras = "Empresa com maior quantidade de produtos estocados"
+    text = "Empresa com maior quantidade de produtos estocados"
     for company in stock:
         result.append(company["nome_da_empresa"])
-    return f"{palavras}: {max(Counter(result))}"
+    return f"{text}: {max(Counter(result))}"
