@@ -3,8 +3,10 @@ import csv
 
 # inventory_report/reports/simple_report.py
 # exec("../reports/simple_report.py")
-# from ..reports.complete_report import CompleteReport
+from inventory_report.reports.complete_report import CompleteReport
+
 # ("/home/el/foo2/mylib.py")
+
 
 class Inventory:
     @classmethod
@@ -14,10 +16,7 @@ class Inventory:
             jobs_reade = csv.DictReader(file)
             for job in jobs_reade:
                 jobs.append(job)
-            # if type_report == "completo":
-                # return CompleteReport.generate(jobs)
+            if type_report == "completo":
+                return CompleteReport.generate(jobs)
             if type_report == "simples":
                 return SimpleReport.generate(jobs)
-
-
-print(Inventory.import_data('inventory_report/data/inventory.csv', 'completo'))
